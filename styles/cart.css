@@ -269,7 +269,7 @@
   .form__element {
     position: relative;
   }
-  .form__element input, select {
+  /* .form__element input, select {
     border: none;
     background: #fafafa;
     border-radius: .5rem;
@@ -284,7 +284,7 @@
       position: relative;
       display: none;
       visibility: hidden;
-  }
+  } */
 
   /* .form-check-input[type=radio] {
     border: 1px solid;
