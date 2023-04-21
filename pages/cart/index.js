@@ -69,7 +69,7 @@ const Cart = () => {
   const total2 = cart.reduce((total, prd) => total + prd.quantity , 0);
 
   if (isLoading) {
-    return   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    return   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
     <Spinner animation="border" role="status">
       
     </Spinner>
