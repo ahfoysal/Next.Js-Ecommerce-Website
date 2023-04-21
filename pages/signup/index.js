@@ -14,6 +14,7 @@ const Signup = () => {
   const { setIsLoggedIn, isLoggedIn, getUser } = useContextS();
   const router = useRouter();
     const [ email, setEmail ] = useState("");
+    const [ phone, setPhone ] = useState("");
     const [ password, setPassword ]  = useState("");
     const [ userName, setUserName ]  = useState("");
 
@@ -28,7 +29,8 @@ const Signup = () => {
         const body = {
           email: email,
           password: password,
-          userName: userName
+          userName: userName,
+          user_nicename: phone
         };
       
         try {
@@ -89,6 +91,10 @@ const Signup = () => {
       <div className="input-bx">
             <input  type="email" required="required" onChange={(e) => setEmail(e.target.value)}/>
             <span>Email</span>
+        </div>     <br />
+        <div className="input-bx">
+            <input  type="phone" required="required"  defaultValue={'+880'} onChange={(e) => setPhone(e.target.value)}/>
+            <span>Phone</span>
         </div>     <br />
 
       <div className="input-bx">
