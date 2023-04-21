@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
      <Provider store={store}>
      <ContextProviderS>
    <Layout >
-   <NextNProgress color="#4cb875" startPosition={0.3} stopDelayMs={200}  height={4} showOnShallow={true} />
+   <NextNProgress color="#f90" startPosition={0.3} stopDelayMs={200}  height={4} showOnShallow={true} />
       <Component {...pageProps} />
       </Layout>
       </ContextProviderS>

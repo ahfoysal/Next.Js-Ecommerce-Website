@@ -32,16 +32,7 @@ a{
 .w-30{
   width: 40% !important;
 }
-#nprogress .peg {
-  display: block;
-  position: absolute;
-  right: 0;
-  width: 100px;
-  height: 100%;
-  box-shadow: 0 0 10px #84feb3,0 0 5px #84feb3 !important;
-  opacity: 1;
-  transform: rotate(3deg) translateY(-4px);
-}
+
 .filter-panel__title{
   color: #212121;
   font-size: 14px;
