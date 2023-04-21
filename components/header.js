@@ -18,6 +18,8 @@ import Link from 'next/link';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import AutoComplete from './Autocomplete';
+import { useContextS } from '@/store/context/AllContext';
+import { Badge } from 'react-bootstrap';
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Search = styled('div')(({ theme }) => ({
@@ -62,6 +64,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 const Header = () => {
+  const { cart, isLoggedIn} = useContextS();
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const handleOpenNavMenu = (event) => {
@@ -87,7 +91,7 @@ const Header = () => {
     <AppBar position="static"   >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+         
           <Link href={'/'}>
           <Typography
             variant="h6"
@@ -105,7 +109,7 @@ const Header = () => {
               textDecoration:  'none',
             }}
           >
-            LOGO
+            NEXT ECOMMERCE
           </Typography>
        
    
@@ -146,14 +150,14 @@ const Header = () => {
                 <Link href={'/shop'}>  <Typography textAlign="center">Shop</Typography></Link>
                 </MenuItem>
                 <MenuItem  onClick={handleCloseNavMenu}>
-                <Link href={'/cart'}>        <Typography textAlign="center">Cart</Typography> </Link>
+                <Link href={'/cart'}>        <Typography textAlign="center">Cart </Typography> </Link>
                 </MenuItem>
                 <MenuItem  onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">About</Typography>
                 </MenuItem>
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+     
          <Link href={'/'}>
          <Typography
             variant="h5"
@@ -171,7 +175,7 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            NEXT 
           </Typography>
          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -184,7 +188,7 @@ const Header = () => {
               <Link href={'/men?slug=17'}>              <Button
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                mens
+                Category
               </Button>
               </Link>
               <Link href={'/orders'}>              <Button
@@ -196,9 +200,23 @@ const Header = () => {
               <Link href={'/cart'}>              <Button
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                Cart
+                Cart {cart?.length > 0 &&  <Badge bg="secondary">{cart?.length}</Badge>}
               </Button>
               </Link>
+              {isLoggedIn ?
+                <Link href={'/profile'}>              <Button
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Profile 
+              </Button>
+              </Link>
+              :
+              <Link href={'/login'}>              <Button
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Login 
+              </Button>
+              </Link>}
           </Box>
 
         
