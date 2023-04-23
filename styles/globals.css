@@ -9,6 +9,9 @@ main {
   margin-left: 5rem;
   padding: 1rem;
 }
+a{
+  color: #000;
+}
 input{
   background: transparent;
   color: #000;
@@ -52,7 +55,7 @@ body {
     rgb(var(--background-start-rgb));
 }
 a{
-  color: #1a9cb7 !important;
+ color: #000 !important;
   text-decoration: none !important;
 }
 .w-30{
