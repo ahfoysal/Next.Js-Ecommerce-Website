@@ -57,16 +57,16 @@ const Cart = () => {
     }
   }, [cart]);
 
-  const total = cart.reduce((total, item) => {
+  const total = cart?.reduce((total, item) => {
     // Find the item's price based on its ID
-    const matchingItem = cartItems.find(cartItem => cartItem.id === item.id);
+    const matchingItem = cartItems?.find(cartItem => cartItem.id === item.id);
     const price = matchingItem ? matchingItem.price : 0;
 
     // Add the cost of this item to the running total
     return total + price * item.quantity;
   }, 0).toFixed(2);
 
-  const total2 = cart.reduce((total, prd) => total + prd.quantity , 0);
+  const total2 = cart?.reduce((total, prd) => total + prd?.quantity , 0);
 
   if (isLoading) {
     return   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
