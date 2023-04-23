@@ -86,27 +86,27 @@
   }
   
   .btn-11 {
-    border: 1px solid #ff9aff;
-    color: #ff9aff;
-    box-shadow: 0 0 5px #ff9aff, 0 0 5px #ff9aff inset;
+    border: 1px solid #f90;
+    color: #f90;
+    box-shadow: 0 0 5px #f90, 0 0 5px #f90 inset;
     transition: all 0.3s ease;
   
   }
   
   .btn-11:hover {
     text-shadow:
-      0 0 20px #ff9aff,
-      0 0 20px rgb(255, 153, 255),
+      0 0 20px #f90,
+      0 0 20px rgb(255, 153, 0),
   
-      0 0 50px rgba(255, 153, 255, .9),
-      0 0 75px rgba(255, 153, 255, .8),
-      0 0 76px rgba(255, 153, 255, .7),
-      0 0 77px rgba(255, 153, 255, .6),
-      0 0 78px rgba(255, 153, 255, .5),
-      0 0 79px rgba(255, 153, 255, .4),
-      0 0 80px rgba(255, 153, 255, .3),
-      0 0 85px rgba(255, 153, 255, .2),
-      0 0 99px rgba(255, 153, 255, .1);
+      0 0 50px rgba(255, 153, 0, .9),
+      0 0 75px rgba(255, 153, 0, .8),
+      0 0 76px rgba(255, 153, 0, .7),
+      0 0 77px rgba(255, 153, 0, .6),
+      0 0 78px rgba(255, 153, 0, .5),
+      0 0 79px rgba(255, 153, 0, .4),
+      0 0 80px rgba(255, 153, 0, .3),
+      0 0 85px rgba(255, 153, 0, .2),
+      0 0 99px rgba(255, 153, 0, .1);
   }
   
   
