@@ -9,6 +9,10 @@ main {
   margin-left: 5rem;
   padding: 1rem;
 }
+input{
+  background: transparent;
+  color: #000;
+}
 @media only screen and (max-width: 600px){
   .col-sm-6 {
     flex: 0 0 auto;
