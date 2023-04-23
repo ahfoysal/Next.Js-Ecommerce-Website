@@ -1,8 +1,8 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import Link from 'next/link';
 
 
 const HeroCarousel = ({ data }) => {
-    
   return (
     <div className='mt-3'>
       <Splide
@@ -26,6 +26,7 @@ const HeroCarousel = ({ data }) => {
       >
         {data.map((item) => (
           <SplideSlide key={item.title}>
+          <Link href={item.to} >
             <section className={`hero`}>
               <img className={`image`}  src={item.img} />
               
@@ -33,9 +34,10 @@ const HeroCarousel = ({ data }) => {
                 <h1 className={`title`}>{item.title} </h1>
 
                 <p className={`summary`}>{item.description}</p>
-                <button className='custom-btn btn-11'>Shop Now</button>
+                <button className='custom-btn btn-11' >Shop Now</button>
               </div>
             </section>
+          </Link>
           </SplideSlide>
         ))}
       </Splide>

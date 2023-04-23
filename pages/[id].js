@@ -27,7 +27,7 @@ function CategoryPage({ data }) {
   const { id, slug } = router.query;
   let { categories } = useContextS();
   const [products, setProducts] = useState([]);
-  const [details, setDeatils] = useState([]);
+  const [details, setDetails] = useState([]);
   const [page, setPage] = React.useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -74,7 +74,7 @@ function CategoryPage({ data }) {
     
      
       setProducts(data);
-      setDeatils(data)
+      setDetails(data)
       setIsLoading(false);
       
     }
@@ -150,7 +150,7 @@ function CategoryPage({ data }) {
     <div className="row g-3">
       {view === "grid" && products?.map((product, index) => {
         return (
-          <div key={index} className="col-md-2">
+          <div key={index} className="col-md-3 col-sm-6 col-xs-6 col-lg-2">
             <CardProductGrid data={product} />
           </div>
         );
