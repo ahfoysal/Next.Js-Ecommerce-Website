@@ -78,7 +78,7 @@ const Cart = () => {
 
   return (
     <>
-      {cartItems.length >= 1 && (
+      {cartItems?.length >= 1 && (
         <div className='cart-page'>
           <div><p className='top-line'>Your Cart</p></div>
           <div className="cart__inner">

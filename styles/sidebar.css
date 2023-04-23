@@ -49,6 +49,7 @@
   .nav--link:hover {
     filter: grayscale(0%) opacity(1);
   }
+
   
   .link-text {
     display: none;
@@ -62,16 +63,19 @@
   }
   
   .fa-primary {
-    color: #ff7eee;
+    color: #f90;
   }
   
   .fa-secondary {
-    color: #df49a6;
+    color: rgb(230, 165, 67);
   }
   
   .fa-primary,
   .fa-secondary {
     transition: var(--transition-speed);
+  }
+  .nav--link:hover {
+    color: #f90 !important;
   }
   
   .logo {

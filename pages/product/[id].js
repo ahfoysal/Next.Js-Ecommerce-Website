@@ -146,7 +146,7 @@ function ProductDetailView({ product }) {
                       </button>
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control text-center"
                         value={quantity}
                         readOnly
                       />
