@@ -16,10 +16,12 @@ import ProductReviews from '../../components/ProductReviews';
 import { Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 import { useContextS } from '@/store/context/AllContext';
-
+import { SnackbarProvider, enqueueSnackbar } from 'notistack'
+import { useRouter } from 'next/router';
 
 
 function ProductDetailView({ product }) {
+  const router = useRouter()
   let {  addToCart  } =  useContextS();
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
@@ -95,8 +97,17 @@ function ProductDetailView({ product }) {
     setMatchAttributes(matchingVariation)
     console.log(`Matching Variation:`, matchingVariation);
   };
+  const action = () => (
+    <>
+    
+      <button className='btn btn-primary' onClick={() => {  router.push('/cart')}}>
+        View Cart
+      </button>
+    </>
+  );
   return (
     <div className="container-fluid mt-3">
+         <SnackbarProvider  maxSnack={1}  autoHideDuration={1000}/>
    {!loading &&  <div className="row">
     <div className="col-md-8">
             <div className="row mb-3">
@@ -163,7 +174,11 @@ function ProductDetailView({ product }) {
                 
                   <button
                     type="button"
-                    onClick={()=> (addToCart(product.id, quantity))}
+                    onClick={()=> {addToCart(product.id, quantity)
+                      enqueueSnackbar('Added To cart!', {
+                       action,
+                        })
+                    }}
                     className="btn btn-sm btn-primary me-2"
                     title="Add to cart"
                   >

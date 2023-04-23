@@ -21,6 +21,7 @@ const FilterClear = lazy(() => import("../components/filter/Clear"));
 const CardServices = lazy(() => import("../components/card/CardServices"));
 
 
+
 function CategoryPage({ data }) {
   const router = useRouter();
   const parsed = router.asPath ? queryString.parse(router.asPath.split(/\?/)[1]) : {};
@@ -90,6 +91,7 @@ function CategoryPage({ data }) {
 
   return (
     <>
+        
      {
       !isLoading && <>
       {/* <div className="container">
@@ -102,6 +104,7 @@ function CategoryPage({ data }) {
 </div> */}
 
 <div className="container-fluid mb-3 mt-3">
+
 <div className="row">
   <div className="col-md-2">
     { availableCategories.length > 0 && <FilterCategory categories={availableCategories} />}
