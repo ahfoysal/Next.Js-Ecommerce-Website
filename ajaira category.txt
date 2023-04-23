@@ -35,7 +35,20 @@ function CategoryPage({ data }) {
   const [availableCategories, setAvailableCategories] = useState([]);
   const [availableBrands, setAvailableBrands] = useState([]);
 
- 
+  async function fetchBrands(id, brands) {
+
+    const response = await fetch(`/api/product?query=products/attributes/${id}/terms`, {
+      headers: {
+        'Authorization': `${process.env.ACCESS_TOKEN}`
+      }
+    });
+    const data = await response.json();
+    const matchingItems = data?.filter(item =>
+      brands?.options?.some(option => item?.name?.toLowerCase().includes(option.toLowerCase()))
+      ?? false
+    );
+    return setAvailableBrands(matchingItems);
+  }
 
   useEffect(() => {
     const categoryObjects = [];
@@ -70,9 +83,22 @@ function CategoryPage({ data }) {
 
     if (data) {
       setProducts(data)
-    
-    
-     
+      const brands = [];
+      data.forEach(product => {
+        const brandAttribute = product.attributes.find(attr => attr.name === 'Brand');
+        if (brandAttribute) {
+          const brandIndex = brands.findIndex(brand => brand.brandId === brandAttribute.id);
+          if (brandIndex !== -1) {
+            brands[brandIndex].options.push(...brandAttribute.options);
+          } else {
+            brands.push({
+              brandId: brandAttribute.id,
+              options: brandAttribute.options
+            });
+          }
+        }
+      });
+      fetchBrands(brands.length > 0 ? brands[0].brandId : 1, brands.length > 0 ? brands[0] : {});
       setProducts(data);
       setDeatils(data)
       setIsLoading(false);
@@ -105,7 +131,7 @@ function CategoryPage({ data }) {
 <div className="row">
   <div className="col-md-2">
     { availableCategories.length > 0 && <FilterCategory categories={availableCategories} />}
-  
+   {availableBrands.length > 0 &&  <FilterSize name="Brand" items={availableBrands}   />}
     <FilterPrice />
   </div>
   <div className="col-md-10">

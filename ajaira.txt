@@ -1,9 +1,0 @@
-  if(id === 'shop'){
-    const parentZeroCategories = categories.filter(category => category.parent === 0);
-    setAvailableCategories(parentZeroCategories)
-  }else{
-      console.log((categories), slug)
-      const foundCategory = categories.find(category => category.id === 17);
-      const parentZeroCategories = categories.filter(category => category.parent === foundCategory.parent);
-console.log(parentZeroCategories);
-  }
