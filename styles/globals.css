@@ -7,6 +7,7 @@
 }
 main {
   margin-left: 5rem;
+  padding: 1rem;
 }
 @media only screen and (max-width: 600px){
   .col-sm-6 {
@@ -15,7 +16,7 @@ main {
 }
   main {
     margin-left: 0rem;
-    padding: 1rem;
+   
 }
 .ml-10 {
   margin-left: 0rem !important;
