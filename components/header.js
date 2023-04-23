@@ -1,26 +1,16 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import { styled, alpha } from '@mui/material/styles';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import Link from 'next/link';
-
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
 import AutoComplete from './Autocomplete';
-import { useContextS } from '@/store/context/AllContext';
-import { Badge } from 'react-bootstrap';
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -37,237 +27,65 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
+
 const Header = () => {
-  const { cart, isLoggedIn} = useContextS();
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  React.useEffect(() => {
- 
-  }, [])
+
   
 
   return (
-    <AppBar position="static"   >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-         
-          <Link href={'/'}>
-          <Typography
-            variant="h6"
-            noWrap
-          
-           
-            
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration:  'none',
-            }}
-          >
-            NEXT ECOMMERCE
-          </Typography>
-       
-   
-          </Link>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-              
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-             <MenuItem  onClick={handleCloseNavMenu}>
-                <Link href={'/shop'}>  <Typography textAlign="center">Shop</Typography></Link>
-                </MenuItem>
-                <MenuItem  onClick={handleCloseNavMenu}>
-                <Link href={'/cart'}>        <Typography textAlign="center">Cart </Typography> </Link>
-                </MenuItem>
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">About</Typography>
-                </MenuItem>
-            </Menu>
-          </Box>
-     
-         <Link href={'/'}>
-         <Typography
-            variant="h5"
-            noWrap
-          
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            NEXT 
-          </Typography>
-         </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Link href={'/shop'}>              <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Shop
-              </Button>
-              </Link>
-              <Link href={'/men?slug=17'}>              <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Category
-              </Button>
-              </Link>
-              <Link href={'/orders'}>              <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Orders
-              </Button>
-              </Link>
-              <Link href={'/cart'}>              <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Cart {cart?.length > 0 &&  <Badge bg="secondary">{cart?.length}</Badge>}
-              </Button>
-              </Link>
-              {isLoggedIn ?
-                <Link href={'/profile'}>              <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Profile 
-              </Button>
-              </Link>
-              :
-              <Link href={'/login'}>              <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Login 
-              </Button>
-              </Link>}
-          </Box>
-
-        
-          <Box marginRight={2} sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Search For Products"> */}
-            <Search>
-            <AutoComplete />
-            {/*  */}
-      
-            {/* <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            /> */}
-          </Search>
-            {/* </Tooltip> */}
-            </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-             
-                <MenuItem  >
-               <Link href={'/login'} >  <Typography textAlign="center">Login</Typography></Link>
-                </MenuItem>
-              
-           
-            </Menu>
-          </Box>
-          
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <div className='container-fluid mt-3 '>
+    <div className="d-flex justify-content-end align-items-center">
+  
+      <Box marginRight={2} sx={{ flexGrow: 0 }}>
+        <Search>
+          <AutoComplete />
+        </Search>
+      </Box>
+  
+      <Box sx={{ flexGrow: 0 }}>
+        <Tooltip title="Open settings">
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          </IconButton>
+        </Tooltip>
+        <Menu
+          sx={{ mt: '45px' }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          <MenuItem>
+            <Link href={'/login'}>
+              <Typography textAlign="center">Login</Typography>
+            </Link>
+          </MenuItem>
+        </Menu>
+      </Box>
+  
+    </div>            
+  </div>
+  
+  
   )
 }
 

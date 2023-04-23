@@ -1,7 +1,9 @@
 {
     "deepscan.enable": true,
     "cSpell.words": [
+        "appbar",
         "nextjs",
+        "Remy",
         "Splide",
         "splidejs"
     ]

@@ -202,3 +202,10 @@
       -webkit-line-clamp: 4;
     }
   }
+  
+  @media (max-width: 480px) {
+    .splide__arrow {
+      display: none;
+      visibility: hidden;
+  }
+  }

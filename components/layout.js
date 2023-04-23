@@ -2,14 +2,15 @@ import React from 'react'
 import Header from './header'
 import Footer from './Footer';
 import { CssBaseline } from '@mui/material';
-import { useEffect } from 'react';
+import SideBar from './header/sideBar';
 
 
 const Layout = ({ children, data }) => {
   return (
     <div className='fluid'>
+     <CssBaseline />
       <Header />
-      <CssBaseline />
+      <SideBar />
       <main>{children}</main>
       <Footer />
     </div>

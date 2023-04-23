@@ -4,10 +4,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useRouter } from 'next/navigation';
 import SearchIcon from '@mui/icons-material/Search';
-import { v4 as uuidv4 } from 'uuid';
 import { useContextS } from '@/store/context/AllContext';
 
-const accessToken = uuidv4();
 export default function AutoComplete() {
   let {  allProducts  } =  useContextS();
 
@@ -16,16 +14,7 @@ export default function AutoComplete() {
   const [options, setOptions] = React.useState([]);
   const [value, setValue] = React.useState([]);
   const loading = open && options?.length === 0;
-  async function fetchProducts() {
-    const response = await fetch('/api/product', {
-      headers: {
-        'Authorization': `${process.env.ACCESS_TOKEN}`
-      }
-    });
-  const data = await response.json();
-  console.log(accessToken)
-  return data;
-}
+
   
 
   React.useEffect(() => {
