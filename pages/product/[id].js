@@ -160,13 +160,7 @@ function ProductDetailView({ product }) {
                     </div>
                   </div>
                  
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-warning me-2"
-                    title="Buy now"
-                  >
-                    <FaShoppingCart  /> Buy now
-                  </button>
+                
                   <button
                     type="button"
                     onClick={()=> (addToCart(product.id, quantity))}

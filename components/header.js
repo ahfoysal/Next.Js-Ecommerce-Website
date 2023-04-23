@@ -9,6 +9,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
 import AutoComplete from './Autocomplete';
+import { useRouter } from 'next/router';
 
 
 
@@ -30,7 +31,8 @@ const Search = styled('div')(({ theme }) => ({
 
 
 const Header = () => {
-
+  const router = useRouter();
+  const isHomePage = router.pathname === '/';
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -43,8 +45,11 @@ const Header = () => {
   
 
   return (
-    <div className='container-fluid mt-3 '>
-    <div className="d-flex justify-content-end align-items-center">
+    <div className='container-fluid mt-3  d-flex justify-content-between  '>
+       <div>
+       {!isHomePage && <button className="btn ml-10" onClick={() => router.back()}> Back</button>}
+       </div>
+    <div className="d-flex  align-items-center">
   
       <Box marginRight={2} sx={{ flexGrow: 0 }}>
         <Search>
@@ -74,9 +79,10 @@ const Header = () => {
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
+          
           <MenuItem>
-            <Link href={'/login'}>
-              <Typography textAlign="center">Login</Typography>
+            <Link href={'/orders'}>
+              <Typography textAlign="center">Orders</Typography>
             </Link>
           </MenuItem>
         </Menu>

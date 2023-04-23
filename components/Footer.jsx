@@ -12,7 +12,7 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <React.Fragment>
-      <footer>
+      <footer className="ml-10">
         <div className="container-fluid bg-primary">
           <div className="row ">
             <div className="col-md-9 py-3 text-white">

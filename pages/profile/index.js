@@ -29,8 +29,10 @@ useEffect(() => {
       <h3>Hi, {userInfo?.username}</h3>
       <p className="profile-stats">This is your profile page. Here, you can view and customize your profile details. Double check your details before check out.</p>
     </span>
-    <div className="buttons" style={{marginLeft: "auto"}}>
+    <div className="d-flex buttons " style={{marginLeft: "auto"}}>
+    <button className='buttonRed'  onClick={() => {  router.push(`/orders`)}}     style={{padding: "1rem 1.5rem"}}> Orders </button>
     <button className='buttonRed'  onClick={handleLogOut}     style={{padding: "1rem 1.5rem"}}> Sign Out </button>
+
     </div>
     
 
