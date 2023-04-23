@@ -6,17 +6,19 @@
   margin: 0;
 }
 main {
-  margin-left: 5rem;
-  padding: 1rem;
+  margin-left: 0rem;
 }
 @media only screen and (max-width: 600px){
+  .col-sm-6 {
+    flex: 0 0 auto;
+    width: 50% !important;
+}
   main {
-    margin: 0 0 75px;
-    padding: 0;
+    margin-left: 0rem;
 }
 .ml-10 {
-  margin: 0 0 75px !important;
-  padding: 0;
+  margin-left: 0rem !important;
+
 }
 
 }

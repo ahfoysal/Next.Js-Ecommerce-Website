@@ -45,11 +45,11 @@ const Header = () => {
   
 
   return (
-    <div className='container-fluid mt-3  d-flex justify-content-between  '>
-       <div>
-       {!isHomePage && <button className="btn ml-10" onClick={() => router.back()}> Back</button>}
+    <div className='container-fluid mt-3   d-flex align-items-center  justify-content-between  '>
+       <div className='ml-10'>
+       {!isHomePage && <button className='btn   h-100' onClick={() => router.back()}> Back</button>}
        </div>
-    <div className="d-flex  align-items-center">
+    <div className="d-flex ">
   
       <Box marginRight={2} sx={{ flexGrow: 0 }}>
         <Search>

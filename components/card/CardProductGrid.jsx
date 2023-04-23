@@ -1,34 +1,36 @@
-  import React from "react";
-  import Link from "next/link";
+import React from "react";
+import Link from "next/link";
 import Image from "next/image";
+import { Card } from "react-bootstrap";
 
 const CardProductGrid = (props) => {
-  
   const product = props?.data;
+
   return (
-    <div className="card">
-     <Link href={`/product/${product?.slug}`} className="text-decoration-none">
-          
+    <Card>
+      <Link href={`/product/${product?.slug}`} >
       
-      <Image height={200} width={500} src={product?.images[0]?.src} className="card-img-top" alt="..." />
-  
-      <div className="card-body">
-      <h6 className="card-subtitle mb-2">
-          
-            {product?.name}
-         
-        </h6>
+          <Image src={product?.images[0]?.src} className="card-img-top" alt="..." width={500} height={200} />
+        
+    
+
+      <Card.Body>
+        <Card.Title>
       
+            
+              <h6>{product?.name}</h6>
+            
+     
+        </Card.Title>
+
         <div className="my-2">
           <span className="fw-bold h5">৳{product?.price * 100}</span>
-          
-            <del className="small text-muted ms-2">৳{product?.regular_price * 100}</del>
-          
+
+          <del className="small text-muted ms-2">৳{product?.regular_price * 100}</del>
         </div>
-       
-      </div>
-      </Link> 
-    </div>
+      </Card.Body>
+      </Link>
+    </Card>
   );
 };
 
