@@ -1,14 +1,13 @@
 import axios from "axios";
 import { createContext, useEffect, useState, useContext } from "react";
 import { parseCookies } from 'nookies'
-import jwt from 'jsonwebtoken';
 const contextProviderS = createContext();
 
 export function ContextProviderS({ children }) {
   const cookies = parseCookies()
 
   const [allProducts, setAllProducts] = useState([])
-  const [categories, setCtegories] = useState([])
+  const [categories, setCategories] = useState([])
   const [cart, setCart] = useState([]);
   const [isLoggedIn , setIsLoggedIn] = useState(false);
   const [userInfo , setUserInfo] = useState('');
@@ -89,7 +88,7 @@ export function ContextProviderS({ children }) {
       }
     });
   const data = await response.json();
-return setCtegories(data)
+return setCategories(data)
 }
 
 

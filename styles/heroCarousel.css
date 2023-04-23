@@ -1,0 +1,204 @@
+
+  .hero {
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    border-radius: 15px;
+    position: relative;
+    transition: filter 0.3s ease-in-out;
+    min-height: 200px;
+    min-width: 350px;
+    height: 30vw;
+    width: 65vw;
+  }
+  
+  
+  .hero-content {
+    overflow: hidden;
+    background: linear-gradient(to top, black, rgba(0, 0, 0, 0.385), rgba(0, 0, 0, 0));
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* align-items: start; */
+    /* text-align: start; */
+    overflow: hidden;
+    padding: 2vw 2vw 2vw 2vw;
+    /* top, right, bottom, left */
+    box-sizing: border-box;
+    /* include padding in height and width */
+  }
+  
+  .title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: white;
+    font-size: 1.5rem;
+    /* changed font size to 1.5rem */
+    animation: 1s slide-right;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .summary {
+    width: 85%;
+    margin-top: 1rem;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    opacity: 65%;
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--num-lines, 2);
+    -webkit-box-orient: vertical;
+  }
+  
+  .hero-content .duration {
+    color: white;
+    font-size: 1.5rem;
+  }
+  
+  .custom-btn {
+    width: 8rem;
+    /* changed width to 100px */
+    height: 2.5rem;
+    /* changed height to 30px */
+    font-size: 0.8rem;
+    /* changed font size to 0.8rem */
+    margin-top: 1rem;
+    color: #fff;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+  
+  }
+  
+  .btn-11 {
+    border: 1px solid #ff9aff;
+    color: #ff9aff;
+    box-shadow: 0 0 5px #ff9aff, 0 0 5px #ff9aff inset;
+    transition: all 0.3s ease;
+  
+  }
+  
+  .btn-11:hover {
+    text-shadow:
+      0 0 20px #ff9aff,
+      0 0 20px rgb(255, 153, 255),
+  
+      0 0 50px rgba(255, 153, 255, .9),
+      0 0 75px rgba(255, 153, 255, .8),
+      0 0 76px rgba(255, 153, 255, .7),
+      0 0 77px rgba(255, 153, 255, .6),
+      0 0 78px rgba(255, 153, 255, .5),
+      0 0 79px rgba(255, 153, 255, .4),
+      0 0 80px rgba(255, 153, 255, .3),
+      0 0 85px rgba(255, 153, 255, .2),
+      0 0 99px rgba(255, 153, 255, .1);
+  }
+  
+  
+  .hero-content.fade-in {
+    opacity: 1;
+  }
+  
+  
+  
+  @keyframes slide-right {
+    from {
+      margin-left: -50%;
+    }
+  
+    to {
+      margin-left: 0%;
+    }
+  }
+  
+  .image {
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  
+  }
+  .splide__slide.is-active .hero {
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+  
+  }
+  
+  .splide__slide .hero {
+  
+    transform: scale(.8);
+    transition: transform 0.3s ease-in-out;
+  
+  }
+  
+  .splide__slide.is-active .hero-content {
+  
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+  }
+  
+  .splide__slide .hero-content {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+  }
+  
+  @media (max-width: 576px) {
+    .summary {
+      -webkit-line-clamp: 2;
+    }
+  
+    .btn-11 {
+      display: none;
+    }
+  
+    .title {
+      font-size: 1rem;
+    }
+  
+    .splide__pagination__page {
+      display: none;
+    }
+  }
+  
+  /* Medium screens */
+  @media (min-width: 577px) and (max-width: 992px) {
+    .summary {
+      -webkit-line-clamp: 3;
+    }
+  
+    .btn-11 {
+      display: none;
+    }
+  
+    .title {
+      font-size: 1.25rem;
+    }
+  
+    .splide__pagination__page {
+      display: none;
+    }
+  
+  
+  }
+  
+  /* Large screens */
+  @media (min-width: 993px) {
+    .summary {
+      -webkit-line-clamp: 4;
+    }
+  }
