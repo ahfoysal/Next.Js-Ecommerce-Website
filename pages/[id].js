@@ -153,31 +153,40 @@ function CategoryPage({ data }) {
 export async function getServerSideProps(context) {
 
 const { req,query } = context;
-const { id, slug, brand ,max_price	,min_price, order, orderby} = query;
+let { id, slug, brand ,max_price	,min_price, order, orderby, per_page} = query;
 
 const protocol = req.headers['x-forwarded-proto'] || 'http';
 const host = req.headers['x-forwarded-host'] || req.headers.host;
 const baseURL = `${protocol}://${host}`;
 
+let orders = orderby === 'price-desc' ? 'asc' : 'desc';
 
-
-try {
-const response = await axios.get(`${baseURL}/api/product`, {
-headers: {
-'Authorization': `${process.env.ACCESS_TOKEN}`
-},
-params: {
-per_page: 40,
-brand: brand,
-max_price: max_price,
-min_price: min_price,
-category: id === 'shop' ? null : slug,
-orderby: orderby,
-order: order
+if (orderby === 'price-asc' || orderby === 'price-desc') {
+  orderby = 'price';
+}
+console.log(orders)
+const params = {
+  consumer_key: process.env.consumer_key,
+  consumer_secret: process.env.consumer_secret,
+  per_page: per_page || 40,
+  status: 'publish',
+  min_price: min_price,
+  max_price: max_price,
+  orderby,
+  order : orders,
+  category: slug
+};
+if (brand) {
+  params.attribute_term = brand;
+  params.attribute = 'pa_brand';
 }
 
-});
-const data = response.data;
+try {
+  const response = await axios.get(`${process.env.shopLink}products`, {
+    params,
+  });
+
+  const data = response.data;
 
 return {
 props: { data },

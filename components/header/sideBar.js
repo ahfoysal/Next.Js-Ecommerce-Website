@@ -3,7 +3,8 @@ import Link from 'next/link'
 import React from 'react'
 import { BsPerson } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
-import { SiShopify } from 'react-icons/si';
+import { FaShopify } from 'react-icons/fa';
+
 const SideBar = () => {
   let {  isLoggedIn} =  useContextS();
 
@@ -71,7 +72,7 @@ const SideBar = () => {
 
       <li className="nav-item">
       <Link href="/shop " className="nav--link">
-      <SiShopify  style={{ fontSize: '2rem' }} />
+      <FaShopify  style={{ fontSize: '2rem' }} />
           <span className="link-text">Shop</span>
        </Link>
       </li>
