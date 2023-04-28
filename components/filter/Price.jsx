@@ -44,14 +44,11 @@ const FilterPrice = (props) => {
     <div className="card mb-3">
       <div
         className="card-header fw-bold text-uppercase accordion-icon-button"
-        data-bs-toggle="collapse"
-        data-bs-target="#filterPrice"
-        aria-expanded="true"
-        aria-controls="filterPrice"
+       
       >
         <span>Price</span>
       </div>
-      <div className="card-body show" id="filterPrice">
+      <div className="card-body " id="filterPrice">
         <Form onSubmit={handleSubmit} className="d-flex flex-wrap align-items-center justify-content-between">
           <Form.Control  className="w-30" type="number" name="min" placeholder="Min" />
           <Form.Control className="w-30" type='number' placeholder="Max"  name="max" />

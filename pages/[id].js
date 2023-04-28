@@ -1,40 +1,20 @@
 import React, { useState, useEffect, lazy } from "react";
 import { FaTh, FaBars } from 'react-icons/fa';
-import Breadcrumb from "../components/Breadcrumb";
 import CardProductGrid from "../components/card/CardProductGrid";
 import CardProductList from "../components/card/CardProductList";
-import queryString from 'query-string';
-import Router from 'next/router';
-import { Card } from 'react-bootstrap';
 import SortBy from "../components/filter/SortBy";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import axios from "axios";
-import { useContextS } from "@/store/context/AllContext";
 const FilterCategory = lazy(() => import("../components/filter/Category"));
 const FilterPrice = lazy(() => import("../components/filter/Price"));
-const FilterSize = lazy(() => import("../components/filter/Size"));
-const FilterStar = lazy(() => import("../components/filter/Star"));
-const FilterColor = lazy(() => import("../components/filter/Color"));
-const FilterTag = lazy(() => import("../components/filter/Tag"));
-const FilterClear = lazy(() => import("../components/filter/Clear"));
-const CardServices = lazy(() => import("../components/card/CardServices"));
-
 
 
 function CategoryPage({ data }) {
-  const router = useRouter();
-  const parsed = router.asPath ? queryString.parse(router.asPath.split(/\?/)[1]) : {};
-  const { id, slug } = router.query;
-  let { categories } = useContextS();
+
   const [products, setProducts] = useState([]);
   const [details, setDetails] = useState([]);
-  const [page, setPage] = React.useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [view, setView] = useState("grid");
   const [availableCategories, setAvailableCategories] = useState([]);
-  const [availableBrands, setAvailableBrands] = useState([]);
 
  
 
@@ -94,14 +74,7 @@ function CategoryPage({ data }) {
         
      {
       !isLoading && <>
-      {/* <div className="container">
-        <Breadcrumb />
-      </div> */}
-      {/* <div className="p-5  bs-cover container" >
-        <div className="card-group d-flex justify-content-between">
-
-</div>
-</div> */}
+   
 
 <div className="container-fluid mb-3 mt-3">
 
