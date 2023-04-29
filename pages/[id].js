@@ -15,15 +15,16 @@ function CategoryPage({ data }) {
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState("grid");
   const [availableCategories, setAvailableCategories] = useState([]);
-  
 const func = async () => {
   let randomNumber = Math.floor(Math.random() * 100) + 1;
 
   const params = {
-   per_page: randomNumber 
+    consumer_key: process.env.consumer_key,
+    consumer_secret: process.env.consumer_secret,
+    performance: randomNumber
    
   };
-  const response = await axios.get(`/api/product`, {
+  const response = await axios.get(`${process.env.shopLink}products`, {
     params,
   })
   console.log(response.data)
