@@ -1,10 +1,9 @@
-import { useContextS } from '@/store/context/AllContext';
 import Link from 'next/link'
 import React from 'react'
 import { BsPerson } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
 import { FaShopify } from 'react-icons/fa';
-
+import { useContextS } from '@/store/context/AllContext';
 const SideBar = () => {
   let {  isLoggedIn} =  useContextS();
 

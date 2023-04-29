@@ -15,7 +15,17 @@ function CategoryPage({ data }) {
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState("grid");
   const [availableCategories, setAvailableCategories] = useState([]);
-
+const func = async () => {
+  const params = {
+    consumer_key: process.env.consumer_key,
+    consumer_secret: process.env.consumer_secret,
+   
+  };
+  const response = await axios.get(`${process.env.shopLink}products`, {
+    params,
+  })
+  console.log(response.data)
+}
  
 
   useEffect(() => {
@@ -110,7 +120,9 @@ function CategoryPage({ data }) {
           <button
             aria-label="List"
             type="button"
-            onClick={() => onChangeView("list")}
+            onClick={() =>   {
+              func()
+              onChangeView("list")}}
             className={`btn ${
               view === "list"
                 ? "btn-primary"
