@@ -37,10 +37,10 @@ function ProductDetailView({ }) {
   const images = product?.images
   const filteredOptions = product?.attributes 
   const { id } = router.query;
-  const fetch = async (id) => {
-    console.log(id)
+  const fetch = async (productID) => {
+    console.log(productID)
     try {
-      const response = await axios.get(`/api/product?query=products/${id}/variations`, {
+      const response = await axios.get(`/api/product?query=products/${productID}/variations`, {
         headers: {
           'Authorization': `${process.env.ACCESS_TOKEN}`
         }
@@ -93,7 +93,7 @@ function ProductDetailView({ }) {
       fetchRelated(fetchedProduct.related_ids)
   
     if(fetchedProduct?.type === "variable"){
-      fetch(response.id);
+      fetch(fetchedProduct.id);
     }
    
     
