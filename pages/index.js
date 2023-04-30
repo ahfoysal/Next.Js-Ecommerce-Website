@@ -5,9 +5,14 @@ import { useContextS } from '@/store/context/AllContext';
 import CardProductGrid from '@/components/card/CardProductGrid';
 import HeroCarousel from "@/components/heroCarousel/heroCarousel";
 import CardProductGridPlaceHolder from "@/components/card/CardProductGridPlaceHolder";
+import { useEffect } from "react";
 
 export default function Home() {
-let {  allProducts  } =  useContextS();
+let {  allProducts , fetchProducts } =  useContextS();
+useEffect(() => {
+  fetchProducts()
+}, [])
+
   return (
     <>
      <HeroCarousel data={data.banner}/>

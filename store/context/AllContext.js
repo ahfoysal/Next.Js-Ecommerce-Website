@@ -93,6 +93,7 @@ return setCategories(data)
 
 
   async function fetchProducts() {
+    console.log('pre loading')
     const response = await fetch('/api/getproduct', {
       headers: {
         'Authorization': `${process.env.ACCESS_TOKEN}`
@@ -147,7 +148,7 @@ useEffect(() => {
   
     return(  
     <contextProviderS.Provider value={{ categories , allProducts, addToCart, cart,
-     clearTheCart, removeFromCart, setIsLoggedIn, isLoggedIn, getUser, userInfo }}>{children}</contextProviderS.Provider>)
+     clearTheCart, removeFromCart, setIsLoggedIn, isLoggedIn, getUser, userInfo , fetchProducts}}>{children}</contextProviderS.Provider>)
     ;
 
 }
