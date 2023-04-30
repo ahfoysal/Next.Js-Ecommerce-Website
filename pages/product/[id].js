@@ -138,7 +138,7 @@ function ProductDetailView({ }) {
     </>
   );
   return (
-    <div className="container-fluid mt-3">
+    <div className="container-fluid mt-3 min-height100">
          <SnackbarProvider  maxSnack={1}  autoHideDuration={1000}/>
    {!loading &&  <div className="row">
     <div className="col-md-8">

@@ -97,13 +97,13 @@ function CategoryPage({  }) {
 
 
   return (
-    <>
+    <div className="min-height100">
         
      {
       !isLoading && <>
    
 
-<div className="container-fluid mb-3 mt-3">
+<div className="container-fluid mb-3 mt-3 ">
 
 <div className="row">
   <div className="col-md-2">
@@ -175,7 +175,7 @@ function CategoryPage({  }) {
 </div>
       </>
      }
-</>
+</div>
 );
 }
 
