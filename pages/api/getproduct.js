@@ -13,15 +13,18 @@ export default async function handler(req, res) {
   const pre = cache.get('pre');
 
   if (slug && pre  ){
-    console.log(pre?.length , slug)
 
     const filteredArray = pre.filter(obj => {
         return obj.slug === slug;
       });
 
       if(filteredArray.length > 0){
-        console.log('Serving from filter', filteredArray[0].name )
-        return res.status(200).json(filteredArray);
+        console.log('Serving from filter', filteredArray[0].id , 'total cached:',pre?.length)
+        filteredArray[0].cache = 'yes'
+        return res.status(200).json(filteredArray,
+            {
+                'cache': 'hit'
+              });
       }
       
   }    
@@ -72,7 +75,7 @@ export default async function handler(req, res) {
         // console.log( data.length +'products pre fetched')
     }
 
-    console.log('Adding data to cache. and pre');
+    // console.log('Adding data to cache. and pre');
 
     return res.status(200).json(data);
   } catch (error) {
