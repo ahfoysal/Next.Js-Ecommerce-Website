@@ -22,20 +22,25 @@ import NodeCache from 'node-cache';
 
 
 
-function ProductDetailView({ product }) {
+function ProductDetailView({ }) {
+  
   const router = useRouter()
   let {  addToCart  } =  useContextS();
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
+  const [product, setProduct] = useState({});
+
   const [variations, setVariations] = useState([])
   const [related, setRelated] = useState([])
   const [selectedAttributes, setSelectedAttributes] = useState({})
   const [matchAttributes, setMatchAttributes] = useState({})
   const images = product?.images
   const filteredOptions = product?.attributes 
-  const fetchData = async () => {
+  const { id } = router.query;
+  const fetch = async (id) => {
+    console.log(id)
     try {
-      const response = await axios.get(`/api/product?query=products/${product.id}/variations`, {
+      const response = await axios.get(`/api/product?query=products/${id}/variations`, {
         headers: {
           'Authorization': `${process.env.ACCESS_TOKEN}`
         }
@@ -46,7 +51,7 @@ function ProductDetailView({ product }) {
       console.error(error);
     }
   };
-  const fetchRelated = async () => {
+  const fetchRelated = async (related) => {
 
   
     try {
@@ -55,7 +60,7 @@ function ProductDetailView({ product }) {
           'Authorization': `${process.env.ACCESS_TOKEN}`
         },
         params: {
-          include: `${product.related_ids}`
+          include: `${related}`
         }
       }); 
       setRelated(response.data);
@@ -67,19 +72,42 @@ function ProductDetailView({ product }) {
  
 
   useEffect(() => {
-    console.log(product)
-    if(product){
+    async function fetchData() {
+      const protocol = window.location.protocol;
+      const host = window.location.host;
+      const baseURL = `${protocol}//${host}`;
+
+      try {
+        const response = await axios.get(`${baseURL}/api/getproduct`, {
+          headers: {
+            'Authorization': `${process.env.ACCESS_TOKEN}`
+          },
+          params: {
+            slug: id
+          }
+        });
+        const fetchedProduct = response.data[0];
+        console.log(fetchedProduct)
+        setProduct(fetchedProduct);
       setLoading(false)
-      fetchRelated()
-    }
-    if(product?.type === "variable"){
-      fetchData();
+      fetchRelated(fetchedProduct.related_ids)
+  
+    if(fetchedProduct?.type === "variable"){
+      fetch(response.id);
     }
    
     
+       
+      } catch (error) {
+        console.error(error);
+        // setProduct(null);
+      }
+    }
+
+    fetchData();
    
    
-  }, [product])
+  }, [id])
   const handleAttributeChange = (name, option) => {
   
     setSelectedAttributes((prevSelected) => ({
@@ -307,40 +335,38 @@ function ProductDetailView({ product }) {
     </div>
   );
 }
-export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
 
-  const { query , req} = context;
-  const { id} = query;
+//   const { query , req} = context;
+//   const { id} = query;
   
-  const protocol = req.headers['x-forwarded-proto'] || 'http';
-  const host = req.headers['x-forwarded-host'] || req.headers.host;
-  const baseURL = `${protocol}://${host}`;
+//   const protocol = req.headers['x-forwarded-proto'] || 'http';
+//   const host = req.headers['x-forwarded-host'] || req.headers.host;
+//   const baseURL = `${protocol}://${host}`;
   
+
+//   try {
+//   const response = await axios.get(`${baseURL}/api/getproduct`, {
+//   headers: {
+//   'Authorization': `${process.env.ACCESS_TOKEN}`
+//   },
+//   params: {
+//     slug: id
+//   }
   
-  const cache = new NodeCache({ stdTTL: 120 });
- 
-  try {
-  const response = await axios.get(`${baseURL}/api/getproduct`, {
-  headers: {
-  'Authorization': `${process.env.ACCESS_TOKEN}`
-  },
-  params: {
-    slug: id
-  }
+//   });
+//   const product = response.data[0];
   
-  });
-  const product = response.data[0];
-  
-  return {
-  props: { product },
-  };
-  } catch (error) {
-  console.error(error);
-  return {
-  props: { data: error },
-  };
-  }
-  }
+//   return {
+//   props: { product },
+//   };
+//   } catch (error) {
+//   console.error(error);
+//   return {
+//   props: { data: error },
+//   };
+//   }
+//   }
   
 
 export default ProductDetailView;
