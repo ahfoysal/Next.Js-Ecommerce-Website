@@ -93,7 +93,7 @@ return setCategories(data)
 
 
   async function fetchProducts() {
-    const response = await fetch('/api/product', {
+    const response = await fetch('/api/getproduct', {
       headers: {
         'Authorization': `${process.env.ACCESS_TOKEN}`
       }

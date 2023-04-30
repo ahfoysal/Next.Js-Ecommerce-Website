@@ -48,7 +48,7 @@ function CategoryPage({  }) {
 
     setAvailableCategories(categoryObjects);
   }
-    const { id, slug, brand, max_price, min_price, order, orderby } = router.query;
+    const { id, slug, brand, max_price, min_price, order, orderby , per_page} = router.query;
 
     const fetchData = async () => {
       try {
@@ -57,7 +57,7 @@ function CategoryPage({  }) {
             'Authorization': `${process.env.ACCESS_TOKEN}`
           },
           params: {
-            per_page: 40,
+            per_page: per_page,
             brand: brand,
             max_price: max_price,
             min_price: min_price,

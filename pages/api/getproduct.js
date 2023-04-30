@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   let { search, per_page, category, brand, max_price, min_price, orderby, slug, include } = req.query;
 
   let cacheKey = `${process.env.shopLink}products-${JSON.stringify(req.query)}`;
-
+  console.log(cacheKey)
   // Check if response is already cached
   const cachedData = cache.get(cacheKey);
   const pre = cache.get('pre');
@@ -70,8 +70,9 @@ export default async function handler(req, res) {
 
     // Add response to cache with a TTL of 2 minutes (120 seconds)
     cache.set(cacheKey, data, 120);
+    
     if(!slug){
-        cache.set('pre', data, 300);
+        cache.set('pre', data, 3600);
         // console.log( data.length +'products pre fetched')
     }
 
