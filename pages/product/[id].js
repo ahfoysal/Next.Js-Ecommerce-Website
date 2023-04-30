@@ -104,7 +104,9 @@ function ProductDetailView({ }) {
       }
     }
 
+   if(id){
     fetchData();
+   }
    
    
   }, [id])
