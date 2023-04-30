@@ -18,6 +18,8 @@ import axios from 'axios';
 import { useContextS } from '@/store/context/AllContext';
 import { SnackbarProvider, enqueueSnackbar } from 'notistack'
 import { useRouter } from 'next/router';
+import NodeCache from 'node-cache';
+
 
 
 function ProductDetailView({ product }) {
@@ -48,7 +50,7 @@ function ProductDetailView({ product }) {
 
   
     try {
-      const response = await axios.get(`/api/product`, {
+      const response = await axios.get(`/api/getproduct`, {
         headers: {
           'Authorization': `${process.env.ACCESS_TOKEN}`
         },
@@ -315,9 +317,10 @@ export async function getServerSideProps(context) {
   const baseURL = `${protocol}://${host}`;
   
   
-  
+  const cache = new NodeCache({ stdTTL: 120 });
+ 
   try {
-  const response = await axios.get(`${baseURL}/api/product`, {
+  const response = await axios.get(`${baseURL}/api/getproduct`, {
   headers: {
   'Authorization': `${process.env.ACCESS_TOKEN}`
   },

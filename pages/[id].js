@@ -52,7 +52,7 @@ function CategoryPage({  }) {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/product', {
+        const response = await axios.get('/api/getproduct', {
           headers: {
             'Authorization': `${process.env.ACCESS_TOKEN}`
           },

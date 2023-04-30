@@ -3,36 +3,39 @@ import NodeCache from 'node-cache';
 
 const cache = new NodeCache({ stdTTL: 120 });
 
-
-
 export default async function handler(req, res) {
-  let { search, query, per_page, category, brand, max_price	,min_price, orderby , slug, include} = req.query;
+  let { search, per_page, category, brand, max_price, min_price, orderby, slug, include } = req.query;
 
-  let cacheKey;
-
-  if (query) {
-    cacheKey = `${process.env.shopLink}${query}-${JSON.stringify(req.query)}`;
-  } else {
-    cacheKey = `${process.env.shopLink}products-${JSON.stringify(req.query)}`;
-  }
+  let cacheKey = `${process.env.shopLink}products-${JSON.stringify(req.query)}`;
 
   // Check if response is already cached
- 
   const cachedData = cache.get(cacheKey);
- 
+  const pre = cache.get('pre');
+
+  if (slug && pre  ){
+    console.log(pre?.length , slug)
+
+    const filteredArray = pre.filter(obj => {
+        return obj.slug === slug;
+      });
+
+      if(filteredArray.length > 0){
+        console.log('Serving from filter', filteredArray[0].name )
+        return res.status(200).json(filteredArray);
+      }
+      
+  }    
   if (cachedData) {
     console.log('Serving from cache.');
     return res.status(200).json(cachedData);
   }
 
-  
   // Build axios parameters object
   let order = orderby === 'price-desc' ? 'asc' : 'desc';
 
   if (orderby === 'price-asc' || orderby === 'price-desc') {
     orderby = 'price';
   }
-
 
   const params = {
     consumer_key: process.env.consumer_key,
@@ -48,6 +51,7 @@ export default async function handler(req, res) {
     slug: slug,
     include: include
   };
+
   // Add brand attribute if provided
   if (brand) {
     params.attribute_term = brand;
@@ -55,7 +59,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await axios.get(`${process.env.shopLink}${query ? query : 'products'}`, {
+    const response = await axios.get(`${process.env.shopLink}products`, {
       params,
     });
 
@@ -63,8 +67,12 @@ export default async function handler(req, res) {
 
     // Add response to cache with a TTL of 2 minutes (120 seconds)
     cache.set(cacheKey, data, 120);
+    if(!slug){
+        cache.set('pre', data, 300);
+        // console.log( data.length +'products pre fetched')
+    }
 
-    console.log('Adding data to cache.');
+    console.log('Adding data to cache. and pre');
 
     return res.status(200).json(data);
   } catch (error) {
