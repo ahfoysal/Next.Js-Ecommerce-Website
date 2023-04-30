@@ -4,37 +4,25 @@ import CardProductGrid from "../components/card/CardProductGrid";
 import CardProductList from "../components/card/CardProductList";
 import SortBy from "../components/filter/SortBy";
 import axios from "axios";
+import { useRouter } from "next/router";
 const FilterCategory = lazy(() => import("../components/filter/Category"));
 const FilterPrice = lazy(() => import("../components/filter/Price"));
 
 
-function CategoryPage({ data }) {
+function CategoryPage({  }) {
 
   const [products, setProducts] = useState([]);
-  const [details, setDetails] = useState([]);
+  // const [details, setDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState("grid");
   const [availableCategories, setAvailableCategories] = useState([]);
-const func = async () => {
-  let randomNumber = Math.floor(Math.random() * 100) + 1;
-
-  const params = {
-    consumer_key: process.env.consumer_key,
-    consumer_secret: process.env.consumer_secret,
-    per_page: randomNumber
-   
-  };
-  const response = await axios.get(`${process.env.shopLink}products`, {
-    params,
-  })
-  console.log(response.data)
-}
- 
+  const router = useRouter();
 
   useEffect(() => {
+  const catFetch = (products) => {
     const categoryObjects = [];
   
-    data?.forEach(product => {
+    products?.forEach(product => {
       if (product.categories) {
         product.categories.forEach(category => {
           const existingCategory = categoryObjects.find(obj => obj.id === category.id);
@@ -59,21 +47,47 @@ const func = async () => {
     });
 
     setAvailableCategories(categoryObjects);
+  }
+    const { id, slug, brand, max_price, min_price, order, orderby } = router.query;
 
-
-
-    if (data) {
-      setProducts(data)
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/product', {
+          headers: {
+            'Authorization': `${process.env.ACCESS_TOKEN}`
+          },
+          params: {
+            per_page: 40,
+            brand: brand,
+            max_price: max_price,
+            min_price: min_price,
+            category: id === 'shop' ? null : slug,
+            orderby: orderby,
+            order: order
+          }
+        });
+        setProducts(response.data);
+        setIsLoading(false)
+        catFetch(response.data)
+        console.log(response.data)
+      } catch (error) {
+        console.error(error);
+        // setData(error);
+      }
+    };
+    fetchData();
+    // if (data) {
+    //   setProducts(data)
     
     
      
-      setProducts(data);
-      setDetails(data)
-      setIsLoading(false);
+    //   setProducts(data);
+    //   setDetails(data)
+    //   setIsLoading(false);
       
-    }
+    // }
     
-  }, [data])
+  }, [ router.query])
 
   const onChangeView = (view) => {
     setView(view);
@@ -101,12 +115,12 @@ const func = async () => {
     <div className="row">
       <div className="col-7">
         <span className="align-middle fw-bold">
-          {details?.mainInfo?.totalResults} results for{" "}
-          <span className="text-primary">{details?.mods?.filter?.filterItems[0]?.displayValue}</span>
+          {products?.mainInfo?.totalResults} results for{" "}
+          <span className="text-primary">{products?.mods?.filter?.filterItems[0]?.displayValue}</span>
         </span>
       </div>
       <div className="col-5 d-flex justify-content-end">
-        <SortBy options={details?.mods?.sortBar?.sortItems} />
+        <SortBy  />
         <div className="btn-group ms-3" role="group">
           <button
             aria-label="Grid"
@@ -165,53 +179,53 @@ const func = async () => {
 );
 }
 
-export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
 
-const { req,query } = context;
-let { id, slug, brand ,max_price	,min_price, order, orderby, per_page} = query;
+// const { req,query } = context;
+// let { id, slug, brand ,max_price	,min_price, order, orderby, per_page} = query;
 
-const protocol = req.headers['x-forwarded-proto'] || 'http';
-const host = req.headers['x-forwarded-host'] || req.headers.host;
-const baseURL = `${protocol}://${host}`;
+// const protocol = req.headers['x-forwarded-proto'] || 'http';
+// const host = req.headers['x-forwarded-host'] || req.headers.host;
+// const baseURL = `${protocol}://${host}`;
 
-let orders = orderby === 'price-desc' ? 'asc' : 'desc';
+// let orders = orderby === 'price-desc' ? 'asc' : 'desc';
 
-if (orderby === 'price-asc' || orderby === 'price-desc') {
-  orderby = 'price';
-}
-console.log(orders)
-const params = {
-  consumer_key: process.env.consumer_key,
-  consumer_secret: process.env.consumer_secret,
-  per_page: per_page || 40,
-  status: 'publish',
-  min_price: min_price,
-  max_price: max_price,
-  orderby,
-  order : orders,
-  category: slug
-};
-if (brand) {
-  params.attribute_term = brand;
-  params.attribute = 'pa_brand';
-}
+// if (orderby === 'price-asc' || orderby === 'price-desc') {
+//   orderby = 'price';
+// }
+// console.log(orders)
+// const params = {
+//   consumer_key: process.env.consumer_key,
+//   consumer_secret: process.env.consumer_secret,
+//   per_page: per_page || 40,
+//   status: 'publish',
+//   min_price: min_price,
+//   max_price: max_price,
+//   orderby,
+//   order : orders,
+//   category: slug
+// };
+// if (brand) {
+//   params.attribute_term = brand;
+//   params.attribute = 'pa_brand';
+// }
 
-try {
-  const response = await axios.get(`${process.env.shopLink}products`, {
-    params,
-  });
+// try {
+//   const response = await axios.get(`${process.env.shopLink}products`, {
+//     params,
+//   });
 
-  const data = response.data;
+//   const data = response.data;
 
-return {
-props: { data },
-};
-} catch (error) {
-console.error(error);
-return {
-props: { data: error },
-};
-}
-}
+// return {
+// props: { data },
+// };
+// } catch (error) {
+// console.error(error);
+// return {
+// props: { data: error },
+// };
+// }
+// }
 
 export default CategoryPage;
