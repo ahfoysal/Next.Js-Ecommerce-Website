@@ -139,8 +139,9 @@ const getUser = async () => {
 }
 
 useEffect(() => {
-  checkUser()
   fetchProducts()
+  checkUser()
+
   fetchCategories()
   getCart()
 
