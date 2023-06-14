@@ -23,7 +23,7 @@ export default checkAccessToken(async function handler(req, res) {
 
   try {
     const response = await axios.post(
-      `https://shop.abusayeeed.xyz/?rest_route=/simple-jwt-login/v1/auth&${
+      `https://shop.abusayeeed.xyz/wp/?rest_route=/simple-jwt-login/v1/auth&${
         isEmail ? "email" : "username"
       }=${req.body.email}&password=${
         req.body.password
@@ -31,7 +31,7 @@ export default checkAccessToken(async function handler(req, res) {
     );
     res.json(response?.data?.data.jwt); // Only return the JWT token in the response
   } catch (error) {
-    console.log(error.response.data);
-    res.status(401).json(error.response.data);
+    console.log(error.response);
+    res.status(401).json(error.response);
   }
 });
