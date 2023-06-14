@@ -3,7 +3,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["proxy.vnxservers.com", "shop.tazreemart.com"],
+    domains: [
+      "proxy.vnxservers.com",
+      "shop.tazreemart.com, shop.abusayeeed.xyz",
+    ],
   },
   env: {
     shopLink: "https://shop.abusayeeed.xyz/wp/wp-json/wc/v3/",
