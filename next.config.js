@@ -5,7 +5,8 @@ const nextConfig = {
   images: {
     domains: [
       "proxy.vnxservers.com",
-      "shop.tazreemart.com, shop.abusayeeed.xyz",
+      "shop.tazreemart.com",
+      "shop.abusayeeed.xyz",
     ],
   },
   env: {
